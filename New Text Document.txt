@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Technology & AWS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>A Guide to Cloud Technology</h1>
+        <p>Your journey into the world of AWS and the cloud starts here.</p>
+    </header>
+
+    <main>
+        <section id="what-is-cloud">
+            <h2>What is Cloud Computing?</h2>
+            <p>Cloud computing is the on-demand delivery of IT resources and applications over the internet with pay-as-you-go pricing. Instead of buying, owning, and maintaining physical data centers and servers, you can access technology services from a cloud provider like Amazon Web Services (AWS).</p>
+        </section>
+
+        <hr>
+
+        <section id="aws-services">
+            <h2>Core AWS Services</h2>
+            <div class="service-container">
+                <div class="service-card">
+                    <h3>Amazon EC2</h3>
+                    <p>Elastic Compute Cloud (EC2) provides resizable compute capacity in the cloud. Think of it as virtual servers you can use to run applications.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Amazon S3</h3>
+                    <p>Simple Storage Service (S3) is an object storage service that offers industry-leading scalability, data availability, security, and performance. It's used for storing and retrieving any amount of data.</p>
+                </div>
+                <div class="service-card">
+                    <h3>AWS Lambda</h3>
+                    <p>A serverless, event-driven compute service that lets you run code without provisioning or managing servers. You only pay for the compute time you consume.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Amazon RDS</h3>
+                    <p>Relational Database Service (RDS) makes it easy to set up, operate, and scale a relational database in the cloud. It manages the database and operating system for you.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Cloud Technology Guide. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
