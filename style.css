@@ -1,58 +1,78 @@
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+/* Reset default margins/padding */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Fullscreen flex center */
+body {
+    display: flex;
+    justify-content: center;   /* horizontal center */
+    align-items: center;       /* vertical center */
+    height: 100vh;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+/* Login box */
+.login-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    width: 320px;
+    text-align: center;
+}
+
+/* Title */
+.login-container h2 {
+    margin-bottom: 20px;
     color: #333;
 }
 
-header {
-    background-color: #007bff;
-    color: white;
-    padding: 2rem;
-    text-align: center;
-}
-
-h1 {
-    margin: 0;
-}
-
-main {
-    padding: 2rem;
-    max-width: 960px;
-    margin: auto;
-}
-
-section {
-    margin-bottom: 2rem;
-    background: white;
-    padding: 2rem;
+/* Inputs */
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
 }
 
-h2 {
-    color: #007bff;
-}
-
-.service-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-}
-
-.service-card {
-    background: #e9ecef;
-    padding: 1.5rem;
-    border-radius: 6px;
-    text-align: center;
-}
-
-footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #333;
+/* Button */
+#loginBtn {
+    width: 100%;
+    padding: 12px;
+    background: #4facfe;
+    border: none;
+    border-radius: 8px;
     color: white;
-    margin-top: 2rem;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#loginBtn:disabled {
+    background: #bbb;
+    cursor: not-allowed;
+}
+
+#loginBtn:hover:not(:disabled) {
+    background: #00c6ff;
+}
+
+/* Error text */
+#errorMessage {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Register link */
+.login-container p {
+    margin-top: 15px;
+    font-size: 14px;
 }

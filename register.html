@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Cloud App</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      font-family: Arial, sans-serif;
+    }
+
+    .register-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      width: 320px;
+    }
+
+    .register-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form-row {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-row label {
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #444;
+    }
+
+    .form-row input {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .form-row button {
+      padding: 12px;
+      background: #4facfe;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .form-row button:hover {
+      background: #00c6ff;
+    }
+
+    .form-row a {
+      text-align: center;
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #0073e6;
+      text-decoration: none;
+    }
+
+    .form-row a:hover {
+      text-decoration: underline;
+    }
+
+    #responseMessage {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <h2>Register</h2>
+
+    <!-- Row 1: Username -->
+    <div class="form-row">
+      <label for="username">Enter Username</label>
+      <input type="text" id="username" placeholder="Username" required>
+    </div>
+
+    <!-- Row 2: Email -->
+    <div class="form-row">
+      <label for="email">Enter Email Address</label>
+      <input type="email" id="email" placeholder="Email" required>
+    </div>
+
+    <!-- Row 3: Password -->
+    <div class="form-row">
+      <label for="password">Enter Password</label>
+      <input type="password" id="password" placeholder="Password" required>
+    </div>
+
+    <!-- Row 4: Submit Button -->
+    <div class="form-row">
+      <button id="registerBtn">Submit</button>
+    </div>
+
+    <!-- Row 5: Forgot Password -->
+    <div class="form-row">
+      <a href="forgotpassword.html">Forgot your password?</a>
+    </div>
+
+    <!-- Response message -->
+    <p id="responseMessage"></p>
+  </div>
+
+  <script>
+    const apiBase = "https://ep2mawvssb.execute-api.ap-south-1.amazonaws.com/dev/users";
+    const responseMessage = document.getElementById("responseMessage");
+
+    document.getElementById("registerBtn").addEventListener("click", async () => {
+      const username = document.getElementById("username").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!username || !email || !password) {
+        responseMessage.innerText = "⚠️ All fields are required!";
+        return;
+      }
+
+      try {
+        // Step 1: Check if user exists
+        const checkResponse = await fetch(`${apiBase}?email=${encodeURIComponent(email)}`);
+        if (checkResponse.ok) {
+          const checkResult = await checkResponse.json();
+          if (checkResult && checkResult.exists) {
+            responseMessage.innerHTML = `⚠️ User already registered. <a href="login.html">Go to Login</a>`;
+            return;
+          }
+        }
+
+        // Step 2: Register user
+        const registerResponse = await fetch(apiBase, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, email, password })
+        });
+
+        const registerResult = await registerResponse.json();
+        if (registerResponse.ok) {
+          responseMessage.innerHTML = `✅ ${registerResult.message || "User registered successfully!"} <a href="login.html">Login here</a>`;
+        } else {
+          responseMessage.innerHTML = `⚠️ ${registerResult.message || "Registration failed!"}`;
+        }
+      } catch (error) {
+        responseMessage.innerText = "❌ Error: " + error.message;
+      }
+    });
+  </script>
+</body>
+</html>
